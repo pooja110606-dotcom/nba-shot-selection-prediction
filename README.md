@@ -10,7 +10,7 @@ In addition to traditional supervised learning, this project incorporates **semi
 
 ## Problem Statement
 
-In basketball analytics, shot selection plays a crucial role in team performance. Understanding the probability of a successful shot helps coaches and players make better strategic decisions.
+Shot selection is a critical factor in basketball performance. Understanding the probability of a successful shot helps teams optimize offensive strategies and improve decision-making.
 
 The objective of this project is to build a predictive model that determines whether a shot will result in a score based on various features such as distance, location, and game situation.
 
@@ -18,7 +18,7 @@ The objective of this project is to build a predictive model that determines whe
 
 ## Dataset Description
 
-The dataset contains detailed information about each shot attempt, including:
+The dataset contains detailed shot-level information, including:
 
 * Shot distance
 * Shot location (court coordinates)
@@ -36,8 +36,6 @@ SHOT_RESULT
 
 ## Project Workflow
 
-The project follows a structured machine learning pipeline:
-
 1. Data Loading
 2. Exploratory Data Analysis (EDA)
 3. Feature Engineering
@@ -52,22 +50,58 @@ The project follows a structured machine learning pipeline:
 
 ## Semi-Supervised Learning (Key Highlight)
 
-This project uses **semi-supervised learning** to improve performance by leveraging unlabeled data.
+This project uses **semi-supervised learning** to improve model performance by leveraging unlabeled data.
 
 ### Approach:
 
 * Train an initial model on labeled data
-* Predict pseudo-labels for unlabeled data
+* Generate pseudo-labels for unlabeled data
 * Combine labeled and pseudo-labeled data
-* Retrain the model
+* Retrain the model on the expanded dataset
 
-This method helps improve generalization when labeled data is limited.
+This approach helps improve generalization when labeled data is limited.
+
+---
+
+## Modeling Decisions & Justifications
+
+### Why Semi-Supervised Learning
+
+The dataset contained missing labels for shot outcomes. Instead of discarding unlabeled data, semi-supervised learning was used to leverage both labeled and unlabeled samples.
+
+Pseudo-labeling was applied to maximize data utilization and improve model performance.
+
+---
+
+### Why SMOTE Was Not Used
+
+SMOTE (Synthetic Minority Oversampling Technique) was intentionally not used.
+
+Reason:
+
+* Synthetic samples combined with pseudo-labeled data can introduce noise
+* This may negatively affect model performance
+
+Instead, tree-based models (Random Forest, XGBoost) were used as they naturally handle class imbalance.
+
+---
+
+### Why Outliers Were Not Removed
+
+Outliers such as extreme shot distances were retained.
+
+Reason:
+
+* These values represent real-world basketball scenarios
+* Removing them would reduce model realism and introduce bias
+
+Keeping outliers ensures better real-world applicability.
 
 ---
 
 ## Feature Engineering
 
-Important features used in the model include:
+Key features include:
 
 * Shot distance
 * Shot zone
@@ -90,7 +124,7 @@ These features significantly influence shot success probability.
 
 ## Model Evaluation
 
-The models were evaluated using:
+Models were evaluated using:
 
 * Accuracy
 * Precision
@@ -104,7 +138,7 @@ The models were evaluated using:
 * Shot distance is a major factor affecting success rate
 * Shots closer to the basket have higher success probability
 * Three-point shots have lower success rates but higher reward
-* Semi-supervised learning improves model performance by utilizing additional data
+* Semi-supervised learning improves performance by utilizing additional data
 
 ---
 
@@ -120,23 +154,10 @@ XGBoost
 
 ---
 
-## Project Structure
-
-nba-shot-selection-prediction
-
-├── README.md
-├── requirements.txt
-├── data/
-├── notebooks/
-├── src/
-├── models/
-└── reports/
-
----
 
 ## Results
 
-The machine learning models successfully capture patterns in shot selection and scoring probability. The inclusion of semi-supervised learning enhances performance by leveraging additional unlabeled data.
+The models successfully capture patterns in shot selection and scoring probability. Semi-supervised learning enhances performance by utilizing both labeled and unlabeled data.
 
 ---
 
@@ -151,7 +172,7 @@ The machine learning models successfully capture patterns in shot selection and 
 
 ## Conclusion
 
-This project demonstrates how machine learning and semi-supervised learning techniques can be applied to sports analytics. It provides valuable insights into shot selection and helps improve decision-making in basketball.
+This project demonstrates how machine learning and semi-supervised learning techniques can be applied to sports analytics. It provides actionable insights that can improve player performance and team strategies.
 
 
 
